@@ -1,0 +1,21 @@
+{
+  "name": "equipox-infraestructura1 - Laravel Codespace",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu-22.04",
+  "features": {
+    "ghcr.io/devcontainers/features/php:1": {
+      "version": "8.3"
+    },
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "20"
+    },
+    "ghcr.io/devcontainers/features/composer:1": {},
+    "ghcr.io/devcontainers/features/docker-in-docker:1": {}
+  },
+  "mounts": [
+    "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
+  ],
+  "postCreateCommand": "cd example-app && composer install --no-interaction --prefer-dist || true && cp .env.example .env || true && npm install || true",
+  "postStartCommand": "cd example-app && ./vendor/bin/sail up -d || true",
+  "forwardPorts": [80, 5173],
+  "remoteUser": "vscode"
+}
