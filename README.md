@@ -113,6 +113,67 @@ Notas finales:
 - Si el proveedor de Codespaces no permite acceso a Docker (por ejemplo en algunos entornos administrados), usa la sección "Alternativa sin Sail" descrita arriba o ejecuta Sail desde una máquina local con Docker.
 - Después de reconstruir el contenedor, la aplicación debería estar accesible en los puertos expuestos (revisar `Forwarded Ports` en la UI del Codespace).
 
+Levantar y administrar contenedores (comandos rápidos)
+
+Si usas Laravel Sail, aquí están los comandos más importantes para levantar y gestionar los contenedores desde `example-app`:
+
+1. Ir al directorio de la aplicación:
+
+```
+cd example-app
+```
+
+2. Levantar los contenedores en segundo plano:
+
+```
+./vendor/bin/sail up -d
+```
+
+3. Ver el estado de los contenedores:
+
+```
+./vendor/bin/sail ps
+```
+
+4. Ver logs en tiempo real:
+
+```
+./vendor/bin/sail logs -f
+```
+
+5. Ejecutar comandos Artisan (ej.: migraciones):
+
+```
+./vendor/bin/sail artisan key:generate
+./vendor/bin/sail artisan migrate --force
+```
+
+6. Instalar dependencias y compilar assets dentro de Sail:
+
+```
+./vendor/bin/sail npm install
+./vendor/bin/sail npm run build
+```
+
+7. Detener y eliminar los contenedores:
+
+```
+./vendor/bin/sail down
+```
+
+8. Si `./vendor/bin/sail` no existe (antes de `composer install`), instalar Sail localmente:
+
+```
+composer require laravel/sail --dev
+./vendor/bin/sail up -d
+```
+
+Consejos de solución de problemas:
+- Si Composer falla por versión de PHP, asegúrate de que el Codespace use PHP >= 8.3 (la configuración de `.devcontainer` incluida lo provee).
+- Si Docker no está disponible en el Codespace, usa la "Alternativa sin Sail" ya documentada más arriba.
+- Puertos comunes: `80` para la app PHP y `5173` para Vite; revisa `Forwarded Ports` en Codespaces para abrirlos en el navegador.
+
+
 
 
 # Flujo Git utilizado.
